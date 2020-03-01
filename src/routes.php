@@ -19,6 +19,11 @@ return function (App $app) {
         $this->get('croissantage', 'Src\Controller\IndexController:listCroissantage')->setName('croissantage');
         $this->get('croissantageForVote', 'Src\Controller\IndexController:listForVote')->setName('list_for_vote');
 
+        $this->group('voteCroissantage/{id}', function () {
+            $this->get('', 'Src\Controller\IndexController:vote')->setName('vote_croissantage');
+            $this->post('', 'Src\Controller\IndexController:vote');
+        });
+
         $this->group('newCroissantage', function() {
             $this->get('', 'Src\Controller\IndexController:newCroissantage')->setName('new_croissantage');
             $this->post('', 'Src\Controller\IndexController:newCroissantage');

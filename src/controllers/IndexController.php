@@ -50,6 +50,18 @@ final class IndexController extends BaseController
         ]);
     }
 
+    public function vote(Request $request, Response $response, $args)
+    {
+        //$croissatage = $this->container->get('croissantageModel')->find($args['id']);
+        $pastries = $this->container->get('pastryModel')->findAll();
+
+        return $this->render($response, 'user/vote.phtml', [
+            'student' => $this->getUser(),
+            'pastries' => $pastries,
+            'croissantageId' => $args['id']
+        ]);
+    }
+
     public function newCroissantage(Request $request, Response $response)
     {
         if($request->getMethod() === 'POST')

@@ -54,7 +54,7 @@
                                                     <?php if($_hasVoted($c)): ?>
                                                         Déjà voté !
                                                     <?php else: ?>
-                                                        <a href="#">Voter !</a>
+                                                        <a href="<?php echo $_url('vote_croissantage', ['id' => $c->getId()]); ?>">Voter !</a>
                                                     <?php endif; ?>
 
                                                 </td>
