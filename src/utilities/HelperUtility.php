@@ -5,6 +5,7 @@ namespace Src\Utilities;
 
 
 use Psr\Container\ContainerInterface;
+use Src\Entities\Croissantage;
 
 class HelperUtility
 {
@@ -77,5 +78,15 @@ class HelperUtility
         $userId = $this->container->get('session')->get('userId');
 
         return ($userId !== false && $this->container->get('studentModel')->isAdmin($userId));
+    }
+
+    public function hasVoted(Croissantage $c) : bool
+    {
+        $voteModel = $this->container->get('voteModel');
+
+        $userId = $this->container->get('session')->get('userId');
+        $user = $this->container->get('studentModel')->find($userId);
+
+        return $voteModel->hasVoted($c, $user);
     }
 }

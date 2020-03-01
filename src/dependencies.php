@@ -65,6 +65,10 @@ return function (App $app) {
         return new \Src\Repositories\PastryTypeRepository($container->get('pdo'));
     };
 
+    $container['voteModel'] = function ($container) {
+        return new \Src\Repositories\VoteRepository($container->get('pdo'));
+    };
+
     $container['studentModel'] = function ($container) {
         $pdo = $container->get('pdo');
         $pastryModel = $container->get('pastryModel');

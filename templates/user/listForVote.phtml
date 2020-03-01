@@ -39,7 +39,7 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th style="width: 10px">#</th>
+                                            <th>Vote</th>
                                             <th>Date</th>
                                             <th>De</th>
                                             <th>Par</th>
@@ -50,7 +50,14 @@
                                     <tbody>
                                         <?php foreach ($croissantage as $c): ?>
                                             <tr>
-                                                <td><?php echo $c->getId(); ?></td>
+                                                <td>
+                                                    <?php if($_hasVoted($c)): ?>
+                                                        Déjà voté !
+                                                    <?php else: ?>
+                                                        <a href="#">Voter !</a>
+                                                    <?php endif; ?>
+
+                                                </td>
                                                 <td><?php echo $c->getFormatedDate(); ?></td>
                                                 <td><?php echo $c->getIdCed()->getAlias(); ?></td>
                                                 <td><?php echo $c->getIdCer()->getAlias(); ?></td>

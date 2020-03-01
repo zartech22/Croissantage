@@ -112,6 +112,9 @@ class BaseController
 
         // Expose the session for error messages
         $data['_session'] = $this->container->get('session');
+
+        // Tells if the current user has voted for a particular croissantage
+        $data['_hasVoted'] = [$helper, 'hasVoted'];
     }
 
     private function addUser(array &$data) : void
