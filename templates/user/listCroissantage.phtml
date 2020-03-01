@@ -1,0 +1,85 @@
+    <?php require_once '../templates/includes/header.inc.phtml'; ?>
+    <!-- Main Sidebar Container -->
+    <?php require_once '../templates/includes/aside.inc.phtml'; ?>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Liste des croissantages</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Croissantage</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Main row -->
+                <div class="row">
+                    <!-- Left col -->
+                    <section class="col-lg-12 connectedSortable">
+                        <!-- Bordered Table -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Croissantage</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Date</th>
+                                            <th>De</th>
+                                            <th>Par</th>
+                                            <th>Commande le</th>
+                                            <th>Livraison le</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($croissantage as $c): ?>
+                                            <tr>
+                                                <td><?php echo $c->getId(); ?></td>
+                                                <td><?php echo $c->getFormatedDate(); ?></td>
+                                                <td><?php echo $c->getIdCed()->getAlias(); ?></td>
+                                                <td><?php echo $c->getIdCer()->getAlias(); ?></td>
+                                                <td>
+                                                    <?php if($c->getDateCommand() === null): ?>
+                                                        En attente...
+                                                    <?php else: ?>
+                                                        <?php echo $c->getFormatedDateCommand(); ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td><?php echo $c->getFormatedDeadline(); ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-footer">
+                                <a href="<?php echo $_url('new_croissantage'); ?>"><button type="button" class="btn btn-primary">Nouveau croissantage</button</a>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </section>
+                    <!-- /.Left col -->
+                    <!-- right col -->
+                </div>
+                <!-- /.row (main row) -->
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+
+    <?php require_once '../templates/includes/footer.inc.phtml'; ?>

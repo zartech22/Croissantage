@@ -1,0 +1,102 @@
+<?php require_once '../templates/includes/header.inc.phtml'; ?>
+<?php require_once '../templates/includes/aside.inc.phtml'; ?>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Dashboard</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Modification</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- /.row -->
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-12 connectedSortable">
+                    <!-- Default box -->
+                    <!-- Form -->
+                    <?php
+                        if($_session->hasFlash('adminStudentUpdate')):
+                            $status = $_session->getFlash('adminStudentUpdate');
+
+                            if($status === 'success'): ?>
+                                <div class="alert alert-success">
+                                    Étudiant correctement mis à jour !
+                                </div>
+                            <?php   else: ?>
+                                <div class="alert alert-danger">
+                                    <?php echo $status; ?>
+                                </div>
+                            <?php endif; ?>
+                    <?php endif; ?>
+
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Modification de <?php echo ucfirst($student->getAlias()); ?></h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form role="form" method="post" action="<?php echo $action; ?>">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="username">Nom d'utilisateur</label>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?php echo $student->getLogin(); ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="alias">Alias</label>
+                                    <input type="text" class="form-control" id="alias" name="alias" placeholder="Alias" value="<?php echo $student->getAlias(); ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Nouveau mot de passe</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="passwordBis">Retapez le mot de passe</label>
+                                    <input type="password" class="form-control" id="passwordBis" name="passwordBis" placeholder="Retapez le mot de passe" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="defaultPastry">Viennoiserie par défaut</label>
+                                    <select class="form-control" name="defaultPastry">
+                                        <option value="-1">Aucune</option>
+                                        <?php $default = ($student->getDefaultPastry() !== null) ? $student->getDefaultPastry()->getId() : false; ?>
+                                        <?php foreach ($pastries as $pastry): ?>
+                                            <option <?php echo (($pastry->getId() === $default) ? 'selected' : ''); ?> value="<?php echo $pastry->getId(); ?>"><?php echo $pastry->getName(); ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <?php echo $_csrf('modifyStudent'); ?>
+                                <button type="submit" class="btn btn-primary">Modifier</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card -->
+                </section>
+                <!-- /.Left col -->
+                <!-- right col -->
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+
+<?php require_once '../templates/includes/footer.inc.phtml'; ?>
