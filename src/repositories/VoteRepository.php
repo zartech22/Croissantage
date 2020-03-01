@@ -6,6 +6,7 @@ namespace Src\Repositories;
 
 use PDO;
 use Src\Entities\Croissantage;
+use Src\Entities\PastryType;
 use Src\Entities\Students;
 
 class VoteRepository extends BaseRepository
@@ -33,6 +34,17 @@ class VoteRepository extends BaseRepository
         return $req->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function persist(Croissantage $c, PastryType $pastry, Students $students)
+    {
+        $req = $this->requests['persist'];
+
+        $req->execute([
+            ':croissantage' => $c->getId(),
+            ':pastry' => $pastry->getId(),
+            ':student' => $students->getId()
+        ]);
+    }
+
     public function hasVoted(Croissantage $c, Students $students) : bool
     {
         $req = $this->requests['hasVoted'];
@@ -50,5 +62,8 @@ class VoteRepository extends BaseRepository
         $this->requests['find'] = $this->bdd->prepare('SELECT * FROM currentcommand WHERE id = :id');
         $this->requests['findAll'] = $this->bdd->prepare('SELECT * FROM currentcommand');
         $this->requests['hasVoted'] = $this->bdd->prepare('SELECT * FROM currentcommand WHERE idCroissantage = :croissantage AND idStudent = :student');
+
+        $this->requests['persist'] = $this->bdd->prepare('INSERT INTO currentcommand(idCroissantage, pastryType, idStudent) 
+            VALUES(:croissantage, :pastry, :student) ');
     }
 }

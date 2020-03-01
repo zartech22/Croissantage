@@ -30,6 +30,14 @@
                     <!-- Left col -->
                     <section class="col-lg-12 connectedSortable">
                         <!-- Bordered Table -->
+                        <?php if($_session->getFlash('voteSuccess') === true): ?>
+                            <div class="alert alert-success alert-dismissible">
+                                Votre vote a bien été pris en compte !
+                                <button type="button" class="close" data-dismiss="alert">
+                                    &times;
+                                </button>
+                            </div>
+                        <?php endif; ?>
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Croissantage</h3>

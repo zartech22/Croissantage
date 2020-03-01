@@ -52,8 +52,22 @@ final class IndexController extends BaseController
 
     public function vote(Request $request, Response $response, $args)
     {
-        //$croissatage = $this->container->get('croissantageModel')->find($args['id']);
-        $pastries = $this->container->get('pastryModel')->findAll();
+        $pastries = $this->container->get('pastryModel')->findAllAvailable();
+
+        if($request->getMethod() === 'POST' && $this->container->get('helper')->checkPostData(['pastry']))
+        {
+            $croissantage = $this->container->get('croissantageModel')->find($args['id']);
+            $student = $this->getUser();
+            $pastry = $this->container->get('pastryModel')->find($_POST['pastry']);
+
+            if($pastry !== null && $croissantage !== null)
+            {
+                $this->container->get('voteModel')->persist($croissantage, $pastry, $student);
+                $this->container->get('session')->addFlash('voteSuccess', true);
+
+                return $this->redirectToRoute('list_for_vote', $response);
+            }
+        }
 
         return $this->render($response, 'user/vote.phtml', [
             'student' => $this->getUser(),
