@@ -45,18 +45,6 @@ return function (App $app) {
     // -----------------------------------------------------------------------------
     // Model factories
     // -----------------------------------------------------------------------------
-    $container['cfgModel'] = function ($container) {
-        $settings = $container->get('settings');
-        $cfgModel = new Src\Model\ConfigurationModel($container->get('pdo'));
-        return $cfgModel;
-    };
-
-    $container['appModel'] = function($container) {
-        $appModel = new Src\Models\AppModel($container->get('pdo'));
-
-        return $appModel;
-    };
-
     $container['rightsModel'] = function ($container) {
         return new \Src\Repositories\RightsRepository($container->get('pdo'));
     };
