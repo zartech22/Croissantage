@@ -79,6 +79,14 @@ class CroissantageRepository extends BaseRepository
 
         $this->requests['persist'] = $this->bdd->prepare('INSERT INTO croissantage(idCed, idCer, dateC, dateCommand, deadline) 
                 VALUES (:croissanted, :croissanter, :date, :dateCommand, :dateDelivery)');
+
+        $this->requests['maxCroissanter'] = $this->bdd->prepare('SELECT idCer, COUNT(*) AS total FROM croissantage GROUP BY idCer ORDER BY total DESC LIMIT 1');
+        $this->requests['maxCroissanted'] = $this->bdd->prepare('SELECT idCed, COUNT(*) AS total FROM croissantage GROUP BY idCed ORDER BY total DESC LIMIT 1');
+
+        $this->requests['minCroissanter'] = $this->bdd->prepare('SELECT idCer, COUNT(*) AS total FROM croissantage GROUP BY idCer ORDER BY total LIMIT 1');
+        $this->requests['minCroissanted'] = $this->bdd->prepare('SELECT idCed, COUNT(*) AS total FROM croissantage GROUP BY idCed ORDER BY total LIMIT 1');
+
+        $this->requests['total'] = $this->bdd->prepare('SELECT COUNT(*) AS total FROM croissantage');
     }
 
     private function fillStudents(Croissantage $c)
