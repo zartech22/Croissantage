@@ -32,25 +32,38 @@
                     <li class="nav-item">
                         <a href="<?php $_url('index'); ?>" class="nav-link"><p>Accueil</p></a>
                     </li>
-                    <li class="nav-item">
-                        <a href="<?php echo $_url('croissantage'); ?>" class="nav-link">
-                            <i class="nav-icon fa fa-list"></i>
-                            Liste des croissantages
+
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-list"></i>
+                            <p>
+                                Listes
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?php echo $_url('croissantage'); ?>" class="nav-link">
+                                    <p>Liste des croissantages</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?php echo $_url('list_for_vote'); ?>" class="nav-link">
+                                    <p>Liste pour voter</p>
+                                </a>
+                            </li>
+
+                            <?php if($_isAdmin()): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo $_url('admin_list_student'); ?>" class="nav-link">
+                                        <p>Liste des étudiants</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="<?php echo $_url('list_for_vote'); ?>" class="nav-link">
-                            <i class="nav-icon fa fa-list"></i>
-                            Liste pour voter
-                        </a>
-                    </li>
+
                     <?php if($_isAdmin()): ?>
-                        <li class="nav-item">
-                            <a href="<?php echo $_url('admin_list_student'); ?>" class="nav-link">
-                                <i class="nav-icon fa fa-list"></i>
-                                Liste des étudiants
-                            </a>
-                        </li>
                         <li class="nav-item">
                             <a href="<?php echo $_url('admin_update_rights'); ?>" class="nav-link">
                                 <i class="nav-icon fa fa-user-shield"></i>
