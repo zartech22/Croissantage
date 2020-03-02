@@ -59,6 +59,18 @@ return function (App $app) {
                 $this->post('', 'Src\Controller\AdminController:updateRights');
             });
 
+            $this->get('/listPastries', 'Src\Controller\AdminController:listPastryTypes')->setName('admin_list_pastry');
+
+            $this->group('/createPastry', function () {
+                $this->get('', 'Src\Controller\AdminController:createPastry')->setName('admin_create_pastry');
+                $this->post('', 'Src\Controller\AdminController:createPastry');
+            });
+
+            $this->group('/modifyPastry/{id}', function () {
+                $this->get('', 'Src\Controller\AdminController:modifyPastry')->setName('admin_modify_pastry');
+                $this->post('', 'Src\Controller\AdminController:modifyPastry');
+            });
+
         })->add($container->get('adminMiddleware'));
     })->add($container->get('csrfMiddleware'))->add($container->get('authenticationMiddleware'));
 };

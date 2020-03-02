@@ -59,6 +59,11 @@
                                         <p>Liste des étudiants</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo $_url('admin_list_pastry'); ?>" class="nav-link">
+                                        <p>Liste des viennoiseries</p>
+                                    </a>
+                                </li>
                             <?php endif; ?>
                         </ul>
                     </li>
@@ -66,14 +71,20 @@
                     <?php if($_isAdmin()): ?>
                         <li class="nav-item">
                             <a href="<?php echo $_url('admin_update_rights'); ?>" class="nav-link">
-                                <i class="nav-icon fa fa-user-shield"></i>
-                                Gestion droits utilisateurs
+                                <i class="nav-icon fas fa-user-shield"></i>
+                                <p>Gestion droits utilisateurs</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?php echo $_url('admin_create_student'); ?>" class="nav-link">
-                                <i class="nav-icon fa fa-user-plus"></i>
-                                Création étudiant
+                                <i class="nav-icon fas fa-user-plus"></i>
+                                <p>Création étudiant</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo $_url('admin_create_pastry'); ?>" class="nav-link">
+                                <i class="nav-icon fas fa-plus"></i>
+                                <p>Création viennoiserie</p>
                             </a>
                         </li>
                     <?php endif; ?>
