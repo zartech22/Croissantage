@@ -5,6 +5,7 @@ use Slim\App;
 return function (App $app) {
     $container = $app->getContainer();
 
+    /********* ALL PUBLIC ROUTES *********/
     $app->group('/login', function () {
         $this->get('', 'Src\Controller\LoginController:login')->setName('login');
         $this->post('', 'Src\Controller\LoginController:login');
@@ -14,6 +15,8 @@ return function (App $app) {
 
     $app->get('/error400', 'Src\Controller\ErrorController:error400')->setName('error_400');
 
+                             /********* APP *********/
+    /********* under csrfMiddleware & authenticationMiddleware *********/
     $app->group('/', function () use ($container) {
         $this->get('', 'Src\Controller\IndexController:index')->setName('index');
         $this->get('croissantage', 'Src\Controller\IndexController:listCroissantage')->setName('croissantage');
@@ -34,6 +37,8 @@ return function (App $app) {
             $this->post('', 'Src\Controller\IndexController:modifyAccount');
         });
 
+            /********* ADMIN ROUTES *********/
+        /********* under adminMiddleware *********/
         $this->group('admin', function ()
         {
             $this->get('/', 'Src\Controller\AdminController:index')->setName('admin_index');
